@@ -1,4 +1,4 @@
-{
+  {
   "name": "es",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
@@ -8,12 +8,27 @@
   "author": "Oliwia Trendowska <trendowska.oliwia@gmail.com>",
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.vue src",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "momentjs": "^2.0.0",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.5",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.2",
     "quasar": "^1.0.0",
     "vue-i18n": "^8.0.0"
   },
