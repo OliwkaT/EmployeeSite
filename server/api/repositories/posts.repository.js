@@ -18,8 +18,26 @@ const getAllPosts = function (callback) {
     postModel.find(callback)
 }
 
+const updatePostById = function (post, callback) {
+    postModel.updateOne(
+        {
+            _id: post.postId
+        },
+        {
+            $set:
+            {
+                title: post.title,
+                content: post.content
+            },
+
+        },
+        {},
+        callback);
+};
+
 module.exports = {
     createPost,
     deletePost,
-    getAllPosts
+    getAllPosts,
+    updatePostById
 }
