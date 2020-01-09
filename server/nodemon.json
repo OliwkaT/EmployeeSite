@@ -1,0 +1,6 @@
+{
+    "env": {
+        "ATLAS_PWD": "oliwia",
+        "JWT_KEY": "123456"
+    }
+}
