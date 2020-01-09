@@ -64,5 +64,19 @@ router.delete("/:userId", (req, res, next) => {
     })
 });
 
+router.get("/getUsers", (req, res, next) => {
+    return new Promise((resolve, reject) => {
+        userDb.getAllUsers(function (error, post) {
+            if (error)
+                return reject(error)
+            resolve(post);
+        })
+    }).then(response => {
+        res.status(200).json(response)
+    }).catch(error => {
+        res.status(400).json(error)
+    })
+});
+
 
 module.exports = router;

@@ -22,8 +22,13 @@ const deleteUser = function (userId, callback) {
     }, callback)
 }
 
+const getAllUsers = function (callback) {
+    userModel.find(callback)
+}
+
 module.exports = {
     createUser,
     getUserByEmail,
-    deleteUser
+    deleteUser,
+    getAllUsers
 }
