@@ -37,7 +37,7 @@ router.post("/login", (req, res, next) => {
             if (!isPasswordValid)
                 return reject("Not a valid password")
             const yearInSecs = 31556926
-            const token = jwt.sign({ id: dbUser._id }, "token", { expiresIn: yearInSecs }) //year perhaps
+            const token = jwt.sign({ id: dbUser._id }, "token", { expiresIn: yearInSecs })
             tokenDb.saveToken(token, moment().add(yearInSecs, "s"), dbUser, function (error, dbToken) {
                 const noPwUser = { ...dbUser._doc, password: null }
                 resolve({ user: noPwUser, token: token })
@@ -67,6 +67,20 @@ router.delete("/:userId", (req, res, next) => {
 router.get("/getUsers", (req, res, next) => {
     return new Promise((resolve, reject) => {
         userDb.getAllUsers(function (error, post) {
+            if (error)
+                return reject(error)
+            resolve(post);
+        })
+    }).then(response => {
+        res.status(200).json(response)
+    }).catch(error => {
+        res.status(400).json(error)
+    })
+});
+
+router.get("/:userId/data", (req, res, next) => {
+    return new Promise((resolve, reject) => {
+        userDb.getUserById(req.params.userId, function (error, post) {
             if (error)
                 return reject(error)
             resolve(post);
