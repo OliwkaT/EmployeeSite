@@ -11,7 +11,6 @@ const createUser = function (user, callback) {
 };
 
 const getUserByEmail = function (email, callback) {
-    console.log(email)
     userModel.findOne({
         email: email.toLowerCase()
     }, callback)
@@ -27,16 +26,9 @@ const getAllUsers = function (callback) {
     userModel.find(callback)
 }
 
-const getUserById= function (userId, callback) {
-    userModel.findOne({
-        _id: userId
-    }, callback)
-};
-
 module.exports = {
     createUser,
     getUserByEmail,
     deleteUser,
-    getAllUsers,
-    getUserById
+    getAllUsers
 }

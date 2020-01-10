@@ -12,9 +12,6 @@ const postSchema = mongoose.Schema({
     date: { 
         type: Date,
         default: Date.now 
-    },
-    creatorId: {
-        type: mongoose.Types.ObjectId
     }
 });
 
