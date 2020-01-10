@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./api/routes/users");
 const postRoutes = require("./api/routes/posts");
 const eventRoutes = require("./api/routes/events");
+const chatRoutes = require("./api/routes/chat");
 
 mongoose.connect('mongodb://localhost:27017/employeesite', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/events", eventRoutes);
+app.use("/chat", chatRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Nie znaleziono");

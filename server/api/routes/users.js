@@ -33,7 +33,6 @@ router.post("/createUser", (req, res, next) => {
 router.post("/login", (req, res, next) => {
     let user = req.body
     return new Promise((resolve, reject) => {
-        console.log(user)
         userDb.getUserByEmail(user.email, function (error, dbUser) {
             const isPasswordValid = bcrypt.compareSync(user.password, dbUser.password)
             if (!isPasswordValid)
@@ -48,7 +47,6 @@ router.post("/login", (req, res, next) => {
     }).then(response => {
         res.status(200).json(response)
     }).catch(error => {
-        console.log(error)
         res.status(400).json(error)
     })
 });

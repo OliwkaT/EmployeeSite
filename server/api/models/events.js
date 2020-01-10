@@ -7,12 +7,12 @@ const EventSchema = mongoose.Schema({
     },
     description: {
         type: String
-    }, 
-    startDate: { 
-        type: Date,
-        required: true 
     },
-    endDate:{
+    startDate: {
+        type: Date,
+        required: true
+    },
+    endDate: {
         type: Date
     },
     status: {
@@ -22,6 +22,9 @@ const EventSchema = mongoose.Schema({
     creatorId: {
         type: mongoose.Types.ObjectId
     }
-});
+},
+    {
+        timestamps: true
+    });
 
 module.exports = mongoose.model("Event", EventSchema);
