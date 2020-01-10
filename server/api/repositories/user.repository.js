@@ -11,6 +11,7 @@ const createUser = function (user, callback) {
 };
 
 const getUserByEmail = function (email, callback) {
+    console.log(email)
     userModel.findOne({
         email: email.toLowerCase()
     }, callback)

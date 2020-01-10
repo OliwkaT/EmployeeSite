@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Post = require("../models/posts")
 const postDb = require("../repositories/posts.repository");
+const decode = require("jwt-decode");
 
 router.post("/createPost", (req, res, next) => {
     return new Promise((resolve, reject) => {
@@ -10,6 +11,7 @@ router.post("/createPost", (req, res, next) => {
             title: req.body.title,
             content: req.body.content,
             date: req.body.date,
+            creatorId: decode(req.headers.authorization).id
         }, function (error, post) {
             if (error)
                 return reject(error)

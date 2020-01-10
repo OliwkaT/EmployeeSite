@@ -6,7 +6,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userDb = require("../repositories/user.repository");
 const tokenDb = require("../repositories/token.repository");
-const moment = require("moment")
+const moment = require("moment");
+const decode = require("jwt-decode");
 
 router.post("/createUser", (req, res, next) => {
     let password = bcrypt.hashSync(req.body.password, 10);
@@ -32,6 +33,7 @@ router.post("/createUser", (req, res, next) => {
 router.post("/login", (req, res, next) => {
     let user = req.body
     return new Promise((resolve, reject) => {
+        console.log(user)
         userDb.getUserByEmail(user.email, function (error, dbUser) {
             const isPasswordValid = bcrypt.compareSync(user.password, dbUser.password)
             if (!isPasswordValid)
@@ -46,6 +48,7 @@ router.post("/login", (req, res, next) => {
     }).then(response => {
         res.status(200).json(response)
     }).catch(error => {
+        console.log(error)
         res.status(400).json(error)
     })
 });
@@ -66,10 +69,10 @@ router.delete("/:userId", (req, res, next) => {
 
 router.get("/getUsers", (req, res, next) => {
     return new Promise((resolve, reject) => {
-        userDb.getAllUsers(function (error, post) {
+        userDb.getAllUsers(function (error, user) {
             if (error)
                 return reject(error)
-            resolve(post);
+            resolve(user);
         })
     }).then(response => {
         res.status(200).json(response)
@@ -80,10 +83,10 @@ router.get("/getUsers", (req, res, next) => {
 
 router.get("/:userId/data", (req, res, next) => {
     return new Promise((resolve, reject) => {
-        userDb.getUserById(req.params.userId, function (error, post) {
+        userDb.getUserById(req.params.userId, function (error, user) {
             if (error)
                 return reject(error)
-            resolve(post);
+            resolve(user);
         })
     }).then(response => {
         res.status(200).json(response)
@@ -92,5 +95,18 @@ router.get("/:userId/data", (req, res, next) => {
     })
 });
 
+router.get("/userData", (req, res, next) => {
+    return new Promise((resolve, reject) => {
+        userDb.getUserById(decode(req.headers.authorization).id, function (error, user) {
+            if (error)
+                return reject(error)
+            resolve(user);
+        })
+    }).then(response => {
+        res.status(200).json(response)
+    }).catch(error => {
+        res.status(400).json(error)
+    })
+});
 
 module.exports = router;
