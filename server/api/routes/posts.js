@@ -24,7 +24,7 @@ router.post("/createPost", (req, res, next) => {
     });
 });
 
-router.delete("/:postId", (req, res, next) => {
+router.delete("/delete/:postId", (req, res, next) => {
     return new Promise((resolve, reject) => {
         postDb.deletePost(req.params.postId, function (error, post) {
             if (error)
