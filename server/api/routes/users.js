@@ -50,7 +50,7 @@ router.post("/login", (req, res, next) => {
     })
 });
 
-router.delete("/:userId", (req, res, next) => {
+router.delete("/delete/:userId", (req, res, next) => {
     return new Promise((resolve, reject) => {
         userDb.deleteUser(req.params.userId, function (error, user) {
             if (error)
