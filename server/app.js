@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./api/routes/users");
 const postRoutes = require("./api/routes/posts");
+const taskRoutes = require("./api/routes/tasks");
 
 app.use(cors())
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/tasks", taskRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Nie znaleziono");
