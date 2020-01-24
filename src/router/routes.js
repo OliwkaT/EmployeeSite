@@ -1,10 +1,21 @@
 
 const routes = [
   {
-    path: '/',
+    path: '',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      {
+        path: '/',
+        redirect: 'dashboard'
+      },
+      { path: 'dashboard', component: () => import('pages/Index.vue') }
+    ]
+  },
+  {
+    path: '/user',
+    component: () => import('layouts/fullPage/FullPage.vue'),
+    children: [
+      { path: 'login', component: () => import('pages/Login.vue') }
     ]
   }
 ]

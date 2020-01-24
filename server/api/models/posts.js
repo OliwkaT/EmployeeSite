@@ -8,17 +8,11 @@ const postSchema = mongoose.Schema({
     content: {
         type: String,
         required: true
-    },
-    date: {
+    }, 
+    date: { 
         type: Date,
-        default: Date.now
-    },
-    creatorId: {
-        type: mongoose.Types.ObjectId
+        default: Date.now 
     }
-},
-    {
-        timestamps: true
-    });
+});
 
 module.exports = mongoose.model("Post", postSchema);
