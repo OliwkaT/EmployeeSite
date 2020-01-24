@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -6,6 +7,8 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./api/routes/users");
 const postRoutes = require("./api/routes/posts");
+
+app.use(cors())
 
 mongoose.connect('mongodb://localhost:27017/employeesite' , { useNewUrlParser: true, useUnifiedTopology: true });
 
