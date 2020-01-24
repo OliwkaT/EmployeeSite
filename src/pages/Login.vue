@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center bg-grey-4 raleway-font">
+  <q-page class="flex flex-center login-bg raleway-font">
     <div class="column">
       <div class="col text-center q-mb-sm text-h4">
         <div>Hey, good to see you again!</div>
