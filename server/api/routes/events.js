@@ -1,21 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Post = require("../models/posts")
-const postDb = require("../repositories/posts.repository");
+const Event = require("../models/events")
+const eventDb = require("../repositories/events.repository");
 const decode = require("jwt-decode");
 
-router.post("/createPost", (req, res, next) => {
+router.post("/createEvent", (req, res, next) => {
     return new Promise((resolve, reject) => {
-        postDb.createPost({
+        eventDb.createEvent({
             title: req.body.title,
-            content: req.body.content,
-            date: req.body.date,
+            description: req.body.description,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            status: req.body.status,
             creatorId: decode(req.headers.authorization).id
-        }, function (error, post) {
+        }, function (error, event) {
             if (error)
                 return reject(error)
-            resolve(post);
+            resolve(event);
         })
     }).then(response => {
         res.status(200).json(response)
@@ -24,12 +26,12 @@ router.post("/createPost", (req, res, next) => {
     });
 });
 
-router.delete("/:postId", (req, res, next) => {
+router.delete("/:eventId", (req, res, next) => {
     return new Promise((resolve, reject) => {
-        postDb.deletePost(req.params.postId, function (error, post) {
+        eventDb.deleteEvent(req.params.eventId, function (error, event) {
             if (error)
                 return reject(error)
-            resolve(post);
+            resolve(event);
         })
     }).then(response => {
         res.status(200).json(response)
@@ -38,12 +40,12 @@ router.delete("/:postId", (req, res, next) => {
     })
 });
 
-router.get("/getPosts", (req, res, next) => {
+router.get("/getEvents", (req, res, next) => {
     return new Promise((resolve, reject) => {
-        postDb.getAllPosts(function (error, post) {
+        eventDb.getAllEvents(function (error, event) {
             if (error)
                 return reject(error)
-            resolve(post);
+            resolve(event);
         })
     }).then(response => {
         res.status(200).json(response)
@@ -52,18 +54,21 @@ router.get("/getPosts", (req, res, next) => {
     })
 });
 
-router.post("/updatePost/:postId", (req, res, next) => {
+router.post("/updateEvent/:eventId", (req, res, next) => {
     return new Promise((resolve, reject) => {
-        postDb.updatePostById(
+        eventDb.updateEventById(
             {
-                postId: req.params.postId,
+                eventId: req.params.eventId,
                 title: req.body.title,
-                content: req.body.content
+                description: req.body.description,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate,
+                status: req.body.status
             },
-            function (error, post) {
+            function (error, event) {
                 if (error)
                     return reject(error)
-                resolve(post);
+                resolve(event);
             })
     }).then(response => {
         res.status(200).json(response)
