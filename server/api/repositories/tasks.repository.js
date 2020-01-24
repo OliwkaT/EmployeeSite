@@ -17,8 +17,26 @@ const getAllTasks = function (callback) {
     taskModel.find(callback)
 }
 
+const updateTaskById = function (task, callback) {
+    taskModel.updateOne(
+        {
+            _id: task.taskId
+        },
+        {
+            $set:
+            {
+                text: task.text,
+                status: task.status
+            },
+
+        },
+        {},
+        callback);
+};
+
 module.exports = {
     createTask,
     deleteTask,
-    getAllTasks
+    getAllTasks,
+    updateTaskById
 }
