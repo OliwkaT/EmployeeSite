@@ -17,7 +17,11 @@ router.post("/createUser", (req, res, next) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             role: req.body.role,
-            email: req.body.email
+            email: req.body.email,
+            city: req.body.city,
+            department: req.body.department,
+            position: req.body.position,
+            status: req.body.status
         }, function (error, user) {
             if (error)
                 return reject(error)
