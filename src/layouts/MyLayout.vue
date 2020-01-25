@@ -89,8 +89,8 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label>{{user.firstName + ' ' + user.lastName}}</q-item-label>
-          <q-item-label caption>{{user.email}}</q-item-label>
+          <q-item-label></q-item-label>
+          <q-item-label caption></q-item-label>
         </q-item-section>
       </q-item>
 
@@ -101,13 +101,13 @@
       </q-timeline-entry>
 
       <q-timeline-entry
-        :subtitle="[`${notificationDate}`]"
+        :subtitle="`${notificationDate}`"
       >
         <div>Message received</div>
       </q-timeline-entry>
 
       <q-timeline-entry
-        :subtitle="[`${notificationDate}`]"
+        :subtitle="`${notificationDate}`"
         icon="delete"
       >
         <div>Post deleted</div>
