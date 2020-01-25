@@ -7,12 +7,10 @@ const mongoose = require("mongoose");
 const userRoutes = require("./api/routes/users");
 const postRoutes = require("./api/routes/posts");
 const taskRoutes = require("./api/routes/tasks");
+const eventRoutes = require("./api/routes/events");
+const chatRoutes = require("./api/routes/chat");
 
 app.use(cors())
-const eventRoutes = require("./api/routes/events");
-const chatRoutes = require("./api/routes/chat");
-const eventRoutes = require("./api/routes/events");
-const chatRoutes = require("./api/routes/chat");
 
 mongoose.connect('mongodb://localhost:27017/employeesite', { useNewUrlParser: true, useUnifiedTopology: true });
 
