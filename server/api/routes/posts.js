@@ -11,7 +11,7 @@ router.post("/createPost", (req, res, next) => {
             title: req.body.title,
             content: req.body.content,
             date: req.body.date,
-            creatorId: decode(req.headers.authorization).id
+            creatorId: decode(req.headers.authorization).id,
         }, function (error, post) {
             if (error)
                 return reject(error)
@@ -24,7 +24,7 @@ router.post("/createPost", (req, res, next) => {
     });
 });
 
-router.delete("/:postId", (req, res, next) => {
+router.delete("/delete/:postId", (req, res, next) => {
     return new Promise((resolve, reject) => {
         postDb.deletePost(req.params.postId, function (error, post) {
             if (error)

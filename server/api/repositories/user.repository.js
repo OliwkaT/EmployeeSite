@@ -6,8 +6,7 @@ const createUser = function (user, callback) {
         lastName: user.lastName,
         role: user.role,
         email: user.email,
-        password: user.password,
-        userImage: user.userImage
+        password: user.password
     }, callback)
 };
 

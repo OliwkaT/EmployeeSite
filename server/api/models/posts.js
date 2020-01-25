@@ -14,6 +14,10 @@ const postSchema = mongoose.Schema({
         default: Date.now
     },
     creatorId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
+    creatorId: {
         type: mongoose.Types.ObjectId
     }
 },
