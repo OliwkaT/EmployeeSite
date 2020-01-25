@@ -3,12 +3,14 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Task = require("../models/tasks");
 const taskDb = require("../repositories/tasks.repository");
+const decode = require("jwt-decode");
 
 router.post("/createTask", (req, res, next) => {
     return new Promise((resolve, reject) => {
         taskDb.createTask({
             text: req.body.text,
-            status: req.body.status
+            status: req.body.status,
+            creatorId: decode(req.headers.authorization).id,
         }, function (error, task) {
             if (error)
                 return reject(error)
