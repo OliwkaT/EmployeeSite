@@ -3,7 +3,8 @@ const taskModel = require("../models/tasks")
 const createTask = function (task, callback) {
     taskModel.create({
         text: task.text,
-        status: task.status
+        status: task.status,
+        creatorId: task.creatorId
     }, callback);
 };
 

@@ -8,6 +8,10 @@ const taskSchema = mongoose.Schema({
     status: {
         type: String,
         required: true
+    },
+    creatorId: {
+        type: mongoose.Types.ObjectId,
+        required: true
     }
 });
 
