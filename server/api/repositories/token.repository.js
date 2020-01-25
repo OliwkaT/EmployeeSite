@@ -1,6 +1,6 @@
 const tokenModel = require("../models/token");
 
-const saveToken = function(accessToken, expireDate, user, callback) {
+const saveToken = function (accessToken, expireDate, user, callback) {
     tokenModel.create({
         accessToken: accessToken,
         expires: expireDate,

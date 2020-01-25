@@ -6,7 +6,8 @@ const createUser = function (user, callback) {
         lastName: user.lastName,
         role: user.role,
         email: user.email,
-        password: user.password
+        password: user.password,
+        userImage: user.userImage
     }, callback)
 };
 
@@ -26,9 +27,16 @@ const getAllUsers = function (callback) {
     userModel.find(callback)
 }
 
+const getUserById = function (userId, callback) {
+    userModel.findOne({
+        _id: userId
+    }, callback)
+};
+
 module.exports = {
     createUser,
     getUserByEmail,
     deleteUser,
-    getAllUsers
+    getAllUsers,
+    getUserById
 }

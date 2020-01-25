@@ -4,7 +4,8 @@ const createPost = function (post, callback) {
     postModel.create({
         title: post.title,
         content: post.content,
-        date: post.date
+        date: post.date,
+        creatorId: post.creatorId
     }, callback);
 };
 
