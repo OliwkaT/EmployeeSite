@@ -1,0 +1,24 @@
+.main-view {
+  font-family: "raleway";
+  .logo-size {
+    font-size: 70px !important;
+  }
+  .main-header {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(239, 239, 239, 1) 35%,
+      rgba(217, 226, 238, 1) 45%,
+      rgba(189, 210, 236, 1) 66%,
+      rgba(148, 187, 233, 1) 76%,
+      rgba(187, 95, 176, 1) 95%,
+      rgba(218, 24, 132, 1) 100%
+    );
+    color: rgba(218, 24, 132, 1);
+  }
+  .nav-drawer{
+    color: rgba(218, 24, 132, 1);
+    font-size: 20px;
+  }
+}
