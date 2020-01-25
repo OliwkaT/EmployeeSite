@@ -8,41 +8,16 @@ const userDb = require("../repositories/user.repository");
 const tokenDb = require("../repositories/token.repository");
 const moment = require("moment");
 const decode = require("jwt-decode");
-const multer = require("multer");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "./uploads/");
-    },
-    filename: function (req, file, cb) {
-        cb(null, moment().format("DD.MM.YYYY") + " " + file.originalname)
-    }
-});
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-        cb(null, true)
-    } else {
-        cb(null, false);
-    }
-};
-const upload = multer({
-    storage: storage, limits: {
-        fileSize: 1024 * 1024 * 5 
-    },
-    fileFilter: fileFilter
-});
-
-router.post("/createUser", upload.single("userImage"), (req, res, next) => {
+router.post("/createUser", (req, res, next) => {
     let password = bcrypt.hashSync(req.body.password, 10);
-    console.log(req.file);
     return new Promise((resolve, reject) => {
         userDb.createUser({
             password: password, 
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             role: req.body.role,
-            email: req.body.email,
-            userImage: req.file.userImage
+            email: req.body.email
         }, function (error, user) {
             if (error)
                 return reject(error)
