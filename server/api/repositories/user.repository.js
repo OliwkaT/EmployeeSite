@@ -6,12 +6,15 @@ const createUser = function (user, callback) {
         lastName: user.lastName,
         role: user.role,
         email: user.email,
-        password: user.password
+        password: user.password,
+        city: user.city,
+        department: user.department,
+        position: user.position,
+        status: user.status
     }, callback)
 };
 
 const getUserByEmail = function (email, callback) {
-    console.log(email)
     userModel.findOne({
         email: email.toLowerCase()
     }, callback)
@@ -27,7 +30,7 @@ const getAllUsers = function (callback) {
     userModel.find(callback)
 }
 
-const getUserById= function (userId, callback) {
+const getUserById = function (userId, callback) {
     userModel.findOne({
         _id: userId
     }, callback)

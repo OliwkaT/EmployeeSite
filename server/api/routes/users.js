@@ -13,11 +13,15 @@ router.post("/createUser", (req, res, next) => {
     let password = bcrypt.hashSync(req.body.password, 10);
     return new Promise((resolve, reject) => {
         userDb.createUser({
-            password: password,
+            password: password, 
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             role: req.body.role,
-            email: req.body.email
+            email: req.body.email,
+            city: req.body.city,
+            department: req.body.department,
+            position: req.body.position,
+            status: req.body.status
         }, function (error, user) {
             if (error)
                 return reject(error)
@@ -33,7 +37,6 @@ router.post("/createUser", (req, res, next) => {
 router.post("/login", (req, res, next) => {
     let user = req.body
     return new Promise((resolve, reject) => {
-        console.log(user)
         userDb.getUserByEmail(user.email, function (error, dbUser) {
             const isPasswordValid = bcrypt.compareSync(user.password, dbUser.password)
             if (!isPasswordValid)
@@ -48,7 +51,6 @@ router.post("/login", (req, res, next) => {
     }).then(response => {
         res.status(200).json(response)
     }).catch(error => {
-        console.log(error)
         res.status(400).json(error)
     })
 });
