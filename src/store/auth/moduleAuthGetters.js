@@ -9,5 +9,8 @@ export default {
   },
   getToken: () => {
     return JSON.parse(localStorage.getItem('token'))
+  },
+  getUsers: (state) => {
+    return state.users
   }
 }
