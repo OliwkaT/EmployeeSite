@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import moduleAuth from './auth/modulaAuth'
 import moduleTasks from './tasks/moduleTasks'
 import modulePosts from './posts/modulePosts'
+import moduleChat from './chat/moduleChat'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export default function (/* { ssrContext } */) {
       // example
       auth: moduleAuth,
       tasks: moduleTasks,
-      posts: modulePosts
+      posts: modulePosts,
+      chat: moduleChat
     },
 
     // enable strict mode (adds overhead!)

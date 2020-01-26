@@ -47,7 +47,7 @@
             <q-item-label>Calendar</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable to="/chat/messages" exact>
+        <q-item clickable to="/chat" exact>
           <q-item-section avatar>
             <q-icon name="chat" />
           </q-item-section>
@@ -104,37 +104,12 @@
             </q-card-section>
           </q-card>
         </q-expansion-item>
-        <div class="q-px-lg q-pb-md">
-          <q-timeline color="primary">
-            <q-timeline-entry heading>Recent Activity</q-timeline-entry>
-
-            <q-timeline-entry :subtitle="`${notificationDate}`">
-              <div>Message received</div>
-            </q-timeline-entry>
-
-            <q-timeline-entry :subtitle="`${notificationDate}`" icon="delete">
-              <div>Post deleted</div>
-            </q-timeline-entry>
-          </q-timeline>
-        </div>
-      </q-card>
-      <q-card class="q-ma-md q-mt-sm">
-        <q-item>
-          <q-item-section avatar class="text-center">
-            <div class="text-h5">My Current Tasks</div>
-          </q-item-section>
-        </q-item>
-        <q-separator />
-
-        <div class="q-pa-md" style="max-width: 350px">
-          <q-list separator v-for="task in getCurrentUserTask ()" :key="task._id">
-            <q-item clickable v-if="task.status === 'IN PROGRESS'">
-              <q-item-section>
-                <q-item-label>{{task.text}}</q-item-label>
-                <q-item-label caption class="status-color">{{task.status}}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
+        <div class="q-px-lg q-pb-md q-mt-md text-left">
+          <q-list bordered separator v-for="user in getFilteredUsers()" :key="user._id">
+      <q-item clickable>
+        <q-item-section>{{user.firstName + ' ' + user.lastName}}</q-item-section>
+      </q-item>
+    </q-list>
         </div>
       </q-card>
     </q-drawer>
@@ -148,22 +123,20 @@
 </template>
 
 <script>
-import moment from 'moment'
 export default {
   data () {
     return {
       left: false,
       right: false,
-      user: this.$store.getters['auth/getUser'],
-      notificationDate: moment().format('DD.MM.YYYY')
+      user: this.$store.getters['auth/getUser']
     }
   },
   beforeCreate () {
-    this.$store.dispatch('tasks/getTasks')
+    this.$store.dispatch('auth/getUsers')
   },
   methods: {
-    getCurrentUserTask () {
-      return this.getTasks.filter(task => task.creatorId === this.user._id)
+    getFilteredUsers () {
+      return this.getUsers.filter(user => user._id !== this.user._id)
     },
     logout () {
       this.$store.dispatch('auth/logout').then(() => {
@@ -172,8 +145,8 @@ export default {
     }
   },
   computed: {
-    getTasks () {
-      return this.$store.getters['tasks/getTasks']
+    getUsers () {
+      return this.$store.getters['auth/getUsers']
     }
   }
 }
