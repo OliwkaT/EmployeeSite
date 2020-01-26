@@ -1,0 +1,15 @@
+.dashboard-view {
+    font-family: "raleway";
+    .content-height {
+        max-height: 400px;
+    }
+    .add-post-card {
+        width: 1000px;
+        @media screen and (min-width:400px) and (max-width:600px) {
+            width: 400px;
+          }
+          @media screen and (min-width:200px) and (max-width:399px) {
+            width: 250px;
+          }
+    }
+}

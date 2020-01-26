@@ -26,7 +26,7 @@ router.post("/createEvent", (req, res, next) => {
     });
 });
 
-router.delete("/:eventId", (req, res, next) => {
+router.delete("/delete/:eventId", (req, res, next) => {
     return new Promise((resolve, reject) => {
         eventDb.deleteEvent(req.params.eventId, function (error, event) {
             if (error)
