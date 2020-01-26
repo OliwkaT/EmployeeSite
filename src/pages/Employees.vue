@@ -36,6 +36,10 @@
         :key="employee._id"
       >
         <q-card>
+            <q-card-section>
+                <q-badge outline color="secondary" label="ONLINE" v-if="employee.status === 'ONLINE'"/>
+                <q-badge outline color="negative" label="OFFLINE" v-else/>
+            </q-card-section>
           <img
             src="https://s3-ap-southeast-1.amazonaws.com/images.humanresourcesonline.net/wp-content/uploads/2019/02/08121400/Aditi-Feb-2019-happy-employee-istock.jpg"
           />
