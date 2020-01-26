@@ -55,7 +55,7 @@
             <q-item-label>Chat</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable>
+        <q-item clickable to="/employees" exact>
           <q-item-section avatar>
             <q-icon name="supervisor_account" />
           </q-item-section>
