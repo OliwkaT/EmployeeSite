@@ -12,7 +12,11 @@
           </q-avatar>Cartero
         </q-toolbar-title>
 
-        <q-btn dense flat round icon="menu" @click="right = !right" />
+        <q-btn round @click="right = !right" class="q-mr-sm">
+          <q-avatar size="40px">
+            <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+          </q-avatar>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -81,40 +85,58 @@
 
     <q-drawer show-if-above v-model="right" side="right">
       <q-card class="q-ma-md q-mt-xl">
-      <q-item>
-        <q-item-section avatar>
-          <q-avatar size="100px">
-            <img src="https://cdn.quasar.dev/img/avatar2.jpg">
-          </q-avatar>
-        </q-item-section>
+        <q-expansion-item>
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-avatar size="60px">
+                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+              </q-avatar>
+            </q-item-section>
 
-        <q-item-section>
-          <q-item-label></q-item-label>
-          <q-item-label caption></q-item-label>
-        </q-item-section>
-      </q-item>
+            <q-item-section>
+              <q-item-label>{{user.firstName + ' ' + user.lastName}}</q-item-label>
+              <q-item-label caption>{{user.email}}</q-item-label>
+            </q-item-section>
+          </template>
+          <q-card>
+            <q-card-section class="text-center cursor-pointer">
+              <div @click="logout()">Log Out</div>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+        <div class="q-px-lg q-pb-md">
+          <q-timeline color="primary">
+            <q-timeline-entry heading>Recent Activity</q-timeline-entry>
 
-      <div class="q-px-lg q-pb-md">
-    <q-timeline color="primary">
-      <q-timeline-entry heading>
-        Timeline heading
-      </q-timeline-entry>
+            <q-timeline-entry :subtitle="`${notificationDate}`">
+              <div>Message received</div>
+            </q-timeline-entry>
 
-      <q-timeline-entry
-        :subtitle="`${notificationDate}`"
-      >
-        <div>Message received</div>
-      </q-timeline-entry>
+            <q-timeline-entry :subtitle="`${notificationDate}`" icon="delete">
+              <div>Post deleted</div>
+            </q-timeline-entry>
+          </q-timeline>
+        </div>
+      </q-card>
+      <q-card class="q-ma-md q-mt-sm">
+        <q-item>
+          <q-item-section avatar class="text-center">
+            <div class="text-h5">My Current Tasks</div>
+          </q-item-section>
+        </q-item>
+        <q-separator />
 
-      <q-timeline-entry
-        :subtitle="`${notificationDate}`"
-        icon="delete"
-      >
-        <div>Post deleted</div>
-      </q-timeline-entry>
-    </q-timeline>
-  </div>
-    </q-card>
+        <div class="q-pa-md" style="max-width: 350px">
+          <q-list separator v-for="task in getCurrentUserTask ()" :key="task._id">
+            <q-item clickable v-if="task.status === 'IN PROGRESS'">
+              <q-item-section>
+                <q-item-label>{{task.text}}</q-item-label>
+                <q-item-label caption class="status-color">{{task.status}}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+      </q-card>
     </q-drawer>
 
     <q-page-container>
@@ -134,6 +156,24 @@ export default {
       right: false,
       user: this.$store.getters['auth/getUser'],
       notificationDate: moment().format('DD.MM.YYYY')
+    }
+  },
+  beforeCreate () {
+    this.$store.dispatch('tasks/getTasks')
+  },
+  methods: {
+    getCurrentUserTask () {
+      return this.getTasks.filter(task => task.creatorId === this.user._id)
+    },
+    logout () {
+      this.$store.dispatch('auth/logout').then(() => {
+        this.$router.push('/user/login')
+      })
+    }
+  },
+  computed: {
+    getTasks () {
+      return this.$store.getters['tasks/getTasks']
     }
   }
 }

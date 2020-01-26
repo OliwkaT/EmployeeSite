@@ -8,7 +8,7 @@ const routes = [
         path: '/',
         redirect: 'dashboard'
       },
-      { path: 'dashboard', component: () => import('pages/Index.vue') }
+      { path: 'dashboard', component: () => import('pages/Dashboard.vue') }
     ]
   },
   {
