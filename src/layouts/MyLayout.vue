@@ -31,7 +31,7 @@
             <q-item-label caption>See whats's new! >></q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable>
+        <q-item clickable to="/tasks" exact>
           <q-item-section avatar>
             <q-icon name="assignment" />
           </q-item-section>

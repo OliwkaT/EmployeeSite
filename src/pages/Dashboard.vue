@@ -1,21 +1,37 @@
 <template>
   <q-page class="flex justify-center dashboard-view">
     <div class="q-pa-md">
+      <q-dialog v-model="editPostDialog">
+        <q-card flat bordered class="edit-post">
+          <q-card-section>
+            <q-input
+              rounded
+              filled
+              v-model="editedTitle"
+              label="Title"
+              :rules="[val => !!val || 'Field is required']"
+            />
+          </q-card-section>
 
-    <q-dialog v-model="editPostDialog">
-          <q-card flat bordered class="test">
-            <q-card-section>
-              <q-input rounded filled v-model="editedTitle" label="Title" :rules="[val => !!val || 'Field is required']"/>
-            </q-card-section>
-
-            <q-card-section horizontal>
-              <q-input v-model="editedContent" filled type="textarea" label="Content" :rules="[val => !!val || 'Field is required']"/>
-            </q-card-section>
-            <q-card-section class="text-right" >
-              <q-btn color="primary" label="Edit Post" @click="editPost()" :disable="editedTitle !== '' && editedContent !== '' ? false:true"/>
-            </q-card-section>
-          </q-card>
-    </q-dialog>
+          <q-card-section horizontal>
+            <q-input
+              v-model="editedContent"
+              filled
+              type="textarea"
+              label="Content"
+              :rules="[val => !!val || 'Field is required']"
+            />
+          </q-card-section>
+          <q-card-section class="text-right">
+            <q-btn
+              color="primary"
+              label="Edit Post"
+              @click="editPost()"
+              :disable="editedTitle !== '' && editedContent !== '' ? false:true"
+            />
+          </q-card-section>
+        </q-card>
+      </q-dialog>
       <div class="row">
         <div class="col">
           <q-card class="add-post-card" flat bordered>
@@ -30,14 +46,31 @@
             </q-item>
             <q-separator />
             <q-card-section>
-              <q-input rounded filled v-model="title" label="Title" :rules="[val => !!val || 'Field is required']"/>
+              <q-input
+                rounded
+                filled
+                v-model="title"
+                label="Title"
+                :rules="[val => !!val || 'Field is required']"
+              />
             </q-card-section>
 
             <q-card-section horizontal>
-              <q-input v-model="content" filled type="textarea" label="Content" :rules="[val => !!val || 'Field is required']"/>
+              <q-input
+                v-model="content"
+                filled
+                type="textarea"
+                label="Content"
+                :rules="[val => !!val || 'Field is required']"
+              />
             </q-card-section>
-            <q-card-section class="text-right" >
-              <q-btn color="primary" label="Add Post" @click="addPost()" :disable="title !== '' && content !== '' ? false:true"/>
+            <q-card-section class="text-right">
+              <q-btn
+                color="primary"
+                label="Add Post"
+                @click="addPost()"
+                :disable="title !== '' && content !== '' ? false:true"
+              />
             </q-card-section>
           </q-card>
         </div>
@@ -62,7 +95,10 @@
                     <q-card-section>
                       <q-list separator>
                         <q-item clickable>
-                          <q-item-section class="status-color" @click="deletePost(post._id)">Delete post</q-item-section>
+                          <q-item-section
+                            class="status-color"
+                            @click="deletePost(post._id)"
+                          >Delete post</q-item-section>
                         </q-item>
                         <q-item clickable>
                           <q-item-section @click="openEditDialog(post)">Edit post</q-item-section>
@@ -79,7 +115,20 @@
                     </q-item-label>
                   </q-item-section>
 
-                  <q-item-section side top>5 min ago</q-item-section>
+                  <q-item-section side top>
+                    <small
+                      v-if="getPostTime(post) < 60"
+                      class="text-grey activity-e-time"
+                    >{{getPostTime(post)}} minutes ago</small>
+                    <small
+                      v-if="getPostTime(post) >= 60 && getPostTime(post) < 1440"
+                      class="text-grey activity-e-time"
+                    >{{Math.floor(getPostTime(post)/60)}} hours ago</small>
+                    <small
+                      v-if="getPostTime(post) >= 1440 && getPostTime(post)"
+                      class="text-grey activity-e-time"
+                    >{{Math.floor(getPostTime(post)/1440)}} days ago</small>
+                  </q-item-section>
                 </div>
               </q-item-section>
             </q-item>
@@ -108,6 +157,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'Dashboard',
   data () {
@@ -126,6 +176,9 @@ export default {
     this.$store.dispatch('auth/getUsers')
   },
   methods: {
+    getPostTime (post) {
+      return moment().diff(moment(post.createdAt), 'minutes')
+    },
     getUserById (userId) {
       const user = this.getUsers.find(user => user._id === userId)
       if (!user) return null
@@ -177,9 +230,8 @@ export default {
     }
   }
 }
-
 </script>
 
 <style lang='scss'>
-@import "./css/dashboardPage.scss"
+@import "./css/dashboardPage.scss";
 </style>
