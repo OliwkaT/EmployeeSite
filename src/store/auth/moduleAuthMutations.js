@@ -8,5 +8,9 @@ export default {
   UPDATE_USER (state, user) {
     state.user = user
     return state
+  },
+  GET_USERS (state, payload) {
+    state.users = payload
+    return state
   }
 }

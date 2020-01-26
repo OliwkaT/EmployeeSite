@@ -22,5 +22,19 @@ export default {
     if (user) {
       commit('UPDATE_USER', user)
     }
+  },
+  getUsers ({ commit }, payload) {
+    return axios.get('http://localhost:3006/users/getUsers', {
+      headers: {
+        Authorization: JSON.parse(localStorage.getItem('token')).accessToken
+      }
+
+    })
+      .then(function (response) {
+        commit('GET_USERS', response.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 }
