@@ -9,7 +9,8 @@ const routes = [
         redirect: 'dashboard'
       },
       { path: 'dashboard', component: () => import('pages/Dashboard.vue') },
-      { path: 'tasks', component: () => import('pages/Tasks.vue') }
+      { path: 'tasks', component: () => import('pages/Tasks.vue') },
+      { path: 'employees', component: () => import('pages/Employees.vue') }
     ]
   },
   {

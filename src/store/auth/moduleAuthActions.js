@@ -36,5 +36,29 @@ export default {
       .catch(function (error) {
         console.log(error)
       })
+  },
+  addUser ({ commit }, payload) {
+    return axios.post('http://localhost:3006/users/createUser', {
+      email: payload.email,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      role: payload.role,
+      password: payload.password,
+      city: payload.city,
+      department: payload.department,
+      position: payload.position,
+      status: payload.status
+    },
+    {
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    })
+      .then(function (response) {
+        commit('GET_USERS', response.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 }
