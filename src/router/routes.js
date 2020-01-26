@@ -1,15 +1,35 @@
 
 const routes = [
   {
-    path: '/',
+    path: '',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      {
+        path: '/',
+        redirect: 'dashboard'
+      },
+      { path: 'dashboard', component: () => import('pages/Dashboard.vue') },
+      { path: 'tasks', component: () => import('pages/Tasks.vue') },
+      { path: 'employees', component: () => import('pages/Employees.vue') },
+      { path: 'chat', component: () => import('pages/Chat.vue') }
+    ]
+  },
+  {
+    path: '/user',
+    component: () => import('layouts/fullPage/FullPage.vue'),
+    children: [
+      { path: 'login', component: () => import('pages/Login.vue') }
+    ]
+  },
+  {
+    path: '/chat',
+    component: () => import('layouts/ChatLayout.vue'),
+    children: [
+      { path: 'messages', component: () => import('pages/Chat.vue') }
     ]
   }
 ]
 
-// Always leave this as last one
 if (process.env.MODE !== 'ssr') {
   routes.push({
     path: '*',

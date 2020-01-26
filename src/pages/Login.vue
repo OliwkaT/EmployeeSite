@@ -58,7 +58,11 @@ export default {
         email: this.email,
         password: this.password
       }
-      this.$store.dispatch('auth/login', payload)
+      this.$store.dispatch('auth/login', payload).then(() => {
+        this.$router.push('/dashboard')
+        this.email = ''
+        this.password = ''
+      })
     }
   }
 }

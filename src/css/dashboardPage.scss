@@ -1,0 +1,33 @@
+.dashboard-view {
+  font-family: "raleway";
+  .content-height {
+    max-height: 400px;
+  }
+  .add-post-card {
+    width: 900px;
+    @media screen and (min-width: 651px) and (max-width: 1520px) {
+      width: 500px;
+    }
+    @media screen and (min-width: 400px) and (max-width: 650px) {
+      width: 400px;
+    }
+    @media screen and (min-width: 200px) and (max-width: 399px) {
+      width: 250px;
+    }
+  }
+  .post-avatar{
+    border-radius: 50%;
+  }
+}
+.edit-post {
+  width: 900px;
+  @media screen and (min-width: 651px) and (max-width: 1520px) {
+    width: 500px;
+  }
+  @media screen and (min-width: 400px) and (max-width: 650px) {
+    width: 400px;
+  }
+  @media screen and (min-width: 200px) and (max-width: 399px) {
+    width: 250px;
+  }
+}
