@@ -8,7 +8,8 @@ const routes = [
         path: '/',
         redirect: 'dashboard'
       },
-      { path: 'dashboard', component: () => import('pages/Dashboard.vue') }
+      { path: 'dashboard', component: () => import('pages/Dashboard.vue') },
+      { path: 'tasks', component: () => import('pages/Tasks.vue') }
     ]
   },
   {
