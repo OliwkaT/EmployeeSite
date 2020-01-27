@@ -106,10 +106,10 @@
         </q-expansion-item>
         <div class="q-px-lg q-pb-md q-mt-md text-left">
           <q-list bordered separator v-for="user in getFilteredUsers()" :key="user._id">
-      <q-item clickable>
-        <q-item-section>{{user.firstName + ' ' + user.lastName}}</q-item-section>
-      </q-item>
-    </q-list>
+            <q-item clickable @click="navigate(user._id)">
+              <q-item-section>{{user.firstName + ' ' + user.lastName}}</q-item-section>
+            </q-item>
+          </q-list>
         </div>
       </q-card>
     </q-drawer>
@@ -142,6 +142,9 @@ export default {
       this.$store.dispatch('auth/logout').then(() => {
         this.$router.push('/user/login')
       })
+    },
+    navigate (id) {
+      this.$router.push('/box/' + id.toString())
     }
   },
   computed: {
@@ -150,8 +153,9 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang='scss'>
-@import "./css/mainLayout.scss";
+  @import "../css/mainLayout.scss";
 </style>
