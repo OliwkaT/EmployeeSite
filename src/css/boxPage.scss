@@ -1,0 +1,17 @@
+.chat-box {
+  font-family: "raleway";
+  width: 900px;
+  height: 200px;
+  @media screen and (min-width: 651px) and (max-width: 1520px) {
+    width: 500px;
+  }
+  @media screen and (min-width: 400px) and (max-width: 650px) {
+    width: 400px;
+  }
+  @media screen and (min-width: 200px) and (max-width: 399px) {
+    width: 250px;
+  }
+}
+.chat-card {
+    height: 600px;
+}
