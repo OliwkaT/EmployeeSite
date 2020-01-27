@@ -180,5 +180,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "./css/mainLayout.scss";
+@import "../css/mainLayout.scss";
 </style>

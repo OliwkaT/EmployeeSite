@@ -10,8 +10,7 @@ const routes = [
       },
       { path: 'dashboard', component: () => import('pages/Dashboard.vue') },
       { path: 'tasks', component: () => import('pages/Tasks.vue') },
-      { path: 'employees', component: () => import('pages/Employees.vue') },
-      { path: 'chat', component: () => import('pages/Chat.vue') }
+      { path: 'employees', component: () => import('pages/Employees.vue') }
     ]
   },
   {
@@ -25,8 +24,14 @@ const routes = [
     path: '/chat',
     component: () => import('layouts/ChatLayout.vue'),
     children: [
-      { path: 'messages', component: () => import('pages/Chat.vue') }
+      { path: 'messages', component: () => import('pages/Chat.vue') },
+      { path: 'box/:senderId', component: () => import('pages/Box.vue') }
     ]
+  },
+  {
+    path: '',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [{ path: '/box/:senderId', component: () => import('pages/Box.vue') }]
   }
 ]
 
