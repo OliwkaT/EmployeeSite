@@ -1,5 +1,5 @@
 export default {
-  getUsers: (state) => {
+  getMessages: (state) => {
     return state.messages
   }
 }

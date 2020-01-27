@@ -1,29 +1,16 @@
 <template>
-  <q-page class="flex q-mt-xl">
-    <!-- <div class="q-pa-md row items-start">
-      <q-card class="chat-card" flat bordered>
-        <q-item>
-          <q-item-section avatar>
-            <q-avatar>
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-          </q-item-section>
+  <q-page class="flex justify-center q-mt-xl">
+<div class="q-pa-md row items-start q-gutter-md">
+    <q-card flat bordered class="my-card">
+      <q-card-section>
+        <div class="text-h6">Choose who you want to have a conversations</div>
+      </q-card-section>
 
-          <q-item-section>
-            <q-item-label>Title</q-item-label>
-            <q-item-label caption>Subhead</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-separator />
-
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4">col</div>
-          <q-separator vertical />
-          <div class="col-xs-12 col-sm-6 col-md-4">col</div>
-        </div>
-      </q-card>
-    </div> -->
+      <q-card-section class="q-pt-none">
+        Click on the name on the right side -->
+      </q-card-section>
+    </q-card>
+  </div>
   </q-page>
 </template>
 
@@ -45,8 +32,10 @@ export default {
     }
   }
 }
+
 </script>
 
-<style lang='scss'>
-@import "./css/chatPage.scss";
+// <style lang='scss'>
+// @import "./css/chatPage.scss";
+//
 </style>
