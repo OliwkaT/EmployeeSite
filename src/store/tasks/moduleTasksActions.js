@@ -4,7 +4,7 @@ export default {
   getTasks ({ commit }, payload) {
     return axios.get('http://localhost:3006/tasks/getTasks', {
       headers: {
-        Authorization: JSON.parse(localStorage.getItem('token')).accessToken
+        Authorization: localStorage.getItem('token')
       }
 
     })
